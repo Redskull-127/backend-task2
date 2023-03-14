@@ -28,6 +28,15 @@ app.get("/all", async (req, res) => {
   res.json({data: resp})
 })
 
+app.post("/all", async (req, res) => {
+  const db = await client.db('backend')
+  const collection = await db.collection('voicegpt')
+  const data = {}
+  data.question = req.params.question
+  data.ans = req.params.ans
+  const res = await collection.insertOne(data)
+})
+
 app.get("/", (req, res) => {
   const q = Url.parse(req.url, true);
   const query = q.query;
