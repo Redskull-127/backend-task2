@@ -21,6 +21,13 @@ app.get("/reset", async (req, res) => {
   resetDatabase(client, req, res);
 });
 
+app.get("/all", async (req, res) => {
+  const db = await client.db('backend')
+  const collection = await db.collection('voicegpt')
+  const resp = await collection.find({}).toArray()
+  res.json({data: resp})
+})
+
 app.get("/", (req, res) => {
   const q = Url.parse(req.url, true);
   const query = q.query;
