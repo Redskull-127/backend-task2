@@ -36,11 +36,12 @@ app.get("/all", async (req, res) => {
 })
 
 app.post("/all", async (req, res) => {
+  const {question, ans} = req.body
   const db = await client.db('backend')
   const collection = await db.collection('voicegpt')
   const data = {}
-  data.question = req.params.question
-  data.ans = req.params.ans
+  data.question = question
+  data.ans = ans
   const response = await collection.insertOne(data)
   res.json({result: response})
 })
