@@ -34,7 +34,8 @@ app.post("/all", async (req, res) => {
   const data = {}
   data.question = req.params.question
   data.ans = req.params.ans
-  const res = await collection.insertOne(data)
+  const response = await collection.insertOne(data)
+  res.json({result: response})
 })
 
 app.get("/", (req, res) => {
