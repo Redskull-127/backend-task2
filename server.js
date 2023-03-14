@@ -5,8 +5,15 @@ import seedDatabase from "./seed.js";
 import resetDatabase from "./reset.js";
 import filterDatabase from "./filter.js";
 import Url from "url";
+import cors from "cors";
 
 const app = express();
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT']
+}))
+
+app.use(express.json());
 const uri =
   "mongodb+srv://meertarbani:Hmeer1257@cluster0.fjzl35w.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
